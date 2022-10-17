@@ -16,25 +16,26 @@ public class MainScene extends Scene
     private Scanner scanner;
     private int curEquationId = -1;
 
-    private GameObject calculator;
+    private GameObject calcObj;
+    private Calculator calculator;
 
     @Override
     public void init()
     {
         scanner = new Scanner(System.in);
-        calculator = Prefabs.generate(
+        addGameObjectToScene(calcObj = Prefabs.generate(
                 "Calculator",
                 new Vector2f(),
                 new Vector2f(),
-                new Calculator(),
+                new Calculator(scanner),
                 new Graph()
-        );
+        ));
     }
 
     @Override
     public void start()
     {
-
+        calculator = getGameObject("Calculator").getComponent(Calculator.class);
     }
 
     private void prompt()
@@ -43,9 +44,9 @@ public class MainScene extends Scene
         System.out.println("Please Enter an equation:");
         System.out.println("[0] displacement = (0.5 * (vi + vf)) * t");
         System.out.println("[1] final velocity = vi + a * t");
-        System.out.println("[2] displacement = v * t + 0.5 * a * t^2");
-        System.out.println("[3] final velocity^2 = vi^2 + 2 * a * d");
-        System.out.println("[4] displacement = vf * t - 0.5 * a * t^2");
+        System.out.println("[2] displacement = vi * t + 0.5 * a * t^2");
+        System.out.println("[3] final velocity^2 = xi + vi^2 + 2 * a * d");
+        System.out.println("[4] displacement = xi + vf * t - 0.5 * a * t^2");
 
         curEquationId = scanner.nextInt();
 
@@ -66,6 +67,11 @@ public class MainScene extends Scene
         switch (curEquationId)
         {
             case -1 -> prompt();
+            case 0 -> calculator.k0();
+            case 1 -> calculator.k1();
+            case 2 -> calculator.k2();
+            case 3 -> calculator.k3();
+            case 4 -> calculator.k4();
         }
     }
 
