@@ -41,12 +41,12 @@ public class MainScene extends Scene
     private void prompt()
     {
         curEquationId = -1;
-        System.out.println("Please Enter an equation:");
-        System.out.println("[0] displacement = (0.5 * (vi + vf)) * t");
-        System.out.println("[1] final velocity = vi + a * t");
-        System.out.println("[2] displacement = vi * t + 0.5 * a * t^2");
-        System.out.println("[3] final velocity^2 = xi + vi^2 + 2 * a * d");
-        System.out.println("[4] displacement = xi + vf * t - 0.5 * a * t^2");
+        System.out.println("enter an equation:");
+        System.out.println("[0] d = (0.5 * (vi + vf)) * t");
+        System.out.println("[1] vf = vi + a * t");
+        System.out.println("[2] d = vi * t + 0.5 * a * t^2");
+        System.out.println("[3] vf^2 = xi + vi^2 + 2 * a * d");
+        System.out.println("[4] d = xi + vf * t - 0.5 * a * t^2");
 
         curEquationId = scanner.nextInt();
 
