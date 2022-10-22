@@ -27,7 +27,7 @@ public class MainScene extends Scene
                 "Calculator",
                 new Vector2f(),
                 new Vector2f(),
-                new Calculator(scanner),
+                new Calculator(),
                 new Graph()
         ));
     }
@@ -36,6 +36,8 @@ public class MainScene extends Scene
     public void start()
     {
         calculator = getGameObject("Calculator").getComponent(Calculator.class);
+
+        updateEquationId();
     }
 
     private void prompt()
@@ -55,6 +57,8 @@ public class MainScene extends Scene
             System.out.println("Invalid option");
             curEquationId = -1;
         }
+
+        updateEquationId();
     }
 
     @Override
@@ -63,16 +67,6 @@ public class MainScene extends Scene
             go.update(dt);
 
         getGameObjects().removeIf(GameObject::isDead);
-
-        switch (curEquationId)
-        {
-            case -1 -> prompt();
-            case 0 -> calculator.k0();
-            case 1 -> calculator.k1();
-            case 2 -> calculator.k2();
-            case 3 -> calculator.k3();
-            case 4 -> calculator.k4();
-        }
     }
 
     @Override
@@ -83,6 +77,19 @@ public class MainScene extends Scene
         {
             for (Component c : go.getAllComponents())
                 c.render(g);
+        }
+    }
+
+    private void updateEquationId()
+    {
+        switch (curEquationId)
+        {
+            case -1 -> prompt();
+            case 0 -> calculator.k0();
+            case 1 -> calculator.k1();
+            case 2 -> calculator.k2();
+            case 3 -> calculator.k3();
+            case 4 -> calculator.k4();
         }
     }
 

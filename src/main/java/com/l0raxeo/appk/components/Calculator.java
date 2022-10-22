@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class Calculator extends Component {
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
-    public Calculator(Scanner scanner) {
-        this.scanner = scanner;
+    public Calculator()
+    {
+        this.scanner = new Scanner(System.in);
     }
 
     //-------------------------------------------------------------------
@@ -28,20 +29,56 @@ public class Calculator extends Component {
         }
     }
 
-    private void k0d() {
+    private void k0d()
+    {
+        double vi, vf, t;
+        System.out.println("enter initial velocity");
+        vi = scanner.nextDouble();
+        System.out.println("enter final velocity");
+        vf = scanner.nextDouble();
+        System.out.println("enter time");
+        t = scanner.nextDouble();
 
+        System.out.println("Displacement = " + ((vi + vf) / 2) * t);
     }
 
-    private void k0vi() {
+    private void k0vi()
+    {
+        double d, t, vf;
+        System.out.println("enter final velocity");
+        vf = scanner.nextDouble();
+        System.out.println("enter time (cannot be 0)");
+        t = scanner.nextDouble();
+        System.out.println("enter displacement");
+        d = scanner.nextDouble();
 
+        System.out.println("initial velocity = " + (((2 * d) / t) - vf));
     }
 
-    private void k0vf() {
+    private void k0vf()
+    {
+        double d, t, vi;
+        System.out.println("enter initial velocity");
+        vi = scanner.nextDouble();
+        System.out.println("enter time (cannot be 0)");
+        t = scanner.nextDouble();
+        System.out.println("enter displacements");
+        d = scanner.nextDouble();
 
+        System.out.println("final velocity = " + (((2 * d) / t) - vi));
     }
 
-    private void k0t() {
+    private void k0t()
+    {
+        double d, vi, vf;
+        System.out.println("enter initial velocity (vi + vf != 0)");
+        vi = scanner.nextDouble();
+        System.out.println("enter final velocity (vi + vf != 0)");
+        vf = scanner.nextDouble();
+        System.out.println("enter displacement");
+        d = scanner.nextDouble();
 
+        System.out.println("time = " + ((2 * d) / (vi + vf)));
     }
 
     //-------------------------------------------------------------------
