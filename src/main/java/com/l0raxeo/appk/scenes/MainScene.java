@@ -3,6 +3,7 @@ package com.l0raxeo.appk.scenes;
 import com.l0raxeo.appk.components.Calculator;
 import com.l0raxeo.appk.components.Component;
 import com.l0raxeo.appk.components.Graph;
+import com.l0raxeo.appk.dataStructure.AssetPool;
 import com.l0raxeo.appk.objects.GameObject;
 import com.l0raxeo.appk.prefabs.Prefabs;
 import org.joml.Vector2f;
@@ -27,8 +28,8 @@ public class MainScene extends Scene
                 "Calculator",
                 new Vector2f(),
                 new Vector2f(),
-                new Calculator(),
-                new Graph()
+                new Graph(),
+                new Calculator()
         ));
     }
 
@@ -38,6 +39,11 @@ public class MainScene extends Scene
         calculator = getGameObject("Calculator").getComponent(Calculator.class);
 
         updateEquationId();
+    }
+
+    @Override
+    public void loadResources() {
+        AssetPool.getFont("assets/fonts/default_font.ttf", 32);
     }
 
     private void prompt()
@@ -67,6 +73,12 @@ public class MainScene extends Scene
             go.update(dt);
 
         getGameObjects().removeIf(GameObject::isDead);
+
+        if (!calculator.calculating)
+        {
+            curEquationId = -1;
+            updateEquationId();
+        }
     }
 
     @Override
@@ -80,7 +92,7 @@ public class MainScene extends Scene
         }
     }
 
-    private void updateEquationId()
+    public void updateEquationId()
     {
         switch (curEquationId)
         {
@@ -91,6 +103,9 @@ public class MainScene extends Scene
             case 3 -> calculator.k3();
             case 4 -> calculator.k4();
         }
+
+        if (curEquationId != -1)
+            calculator.calculating = true;
     }
 
 }

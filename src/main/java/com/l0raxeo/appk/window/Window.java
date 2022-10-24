@@ -148,7 +148,7 @@ public class Window implements Runnable
     private void loop()
     {
         long lastTime = System.nanoTime();
-        double timePerTick = 1000000000D / 60D;
+        double timePerTick = 1000000000D;
         int ticks = 0;
         int frames = 0;
         long lastTimer = System.currentTimeMillis();
@@ -163,12 +163,11 @@ public class Window implements Runnable
             while (delta >= 1)
             {
                 ticks++;
+                render();
+                frames++;
                 update(delta);
                 delta -= 1;
             }
-
-            frames++;
-            render();
 
             if (System.currentTimeMillis() - lastTimer >= 1000)
             {
